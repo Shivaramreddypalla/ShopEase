@@ -57,5 +57,3 @@ public class LoginActivity extends AppCompatActivity {
         return true; // For demonstration purposes, always return true
     }
 }
-
-}
