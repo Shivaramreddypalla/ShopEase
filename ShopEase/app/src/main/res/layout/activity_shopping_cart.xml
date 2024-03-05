@@ -6,4 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".ShoppingCartActivity">
 
+    <TextView
+        android:id="@+id/myCartTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MY CART"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.053" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/myCartTV"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/back" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="408dp"
+        android:layout_height="532dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myCartTV"
+        app:layout_constraintVertical_bias="0.152" />
+
+    <TextView
+        android:id="@+id/totalTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOTAL $"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.558" />
+
+    <Button
+        android:id="@+id/checkoutBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.572"
+        app:layout_constraintStart_toEndOf="@+id/totalTV"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.423" />
 </androidx.constraintlayout.widget.ConstraintLayout>
