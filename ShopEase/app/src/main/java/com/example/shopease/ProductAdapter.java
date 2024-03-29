@@ -39,4 +39,42 @@ import java.util.List;
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
             return new ProductViewHolder(view, mListener);
         }
-}
+        @Override
+        public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+            Product product = productList.get(position);
+            holder.productName.setText(product.getName());
+            holder.productDescription.setText(product.getDescription());
+            holder.productPrice.setText(String.valueOf(product.getPrice()));
+        }
+
+        @Override
+        public int getItemCount() {
+            return productList.size();
+        }
+
+        public static class ProductViewHolder extends RecyclerView.ViewHolder {
+            TextView productName, productDescription, productPrice;
+            Button addButton;
+
+            public ProductViewHolder(@NonNull View itemView, final OnAddItemClickListener listener) {
+                super(itemView);
+                productName = itemView.findViewById(R.id.product_name);
+                productDescription = itemView.findViewById(R.id.product_description);
+                productPrice = itemView.findViewById(R.id.product_price);
+                addButton = itemView.findViewById(R.id.add_button);
+
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (listener != null) {
+                            int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                listener.onAddItemClick(position);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+
