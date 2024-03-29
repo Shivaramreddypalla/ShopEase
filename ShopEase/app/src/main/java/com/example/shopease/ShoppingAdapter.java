@@ -40,3 +40,17 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Produc
                 valueOf
                         (product.getPrice()));
     }
+    @Override
+    public int getItemCount() {
+        return productList.size();
+    }
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+        TextView productName, productPrice;
+        public ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            productName = itemView.findViewById(R.id.product_name);
+            productPrice = itemView.findViewById(R.id.product_price);
+        }
+    }
+}
+
