@@ -13,6 +13,21 @@ public class ShoppingCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
+        // Initialize RecyclerView
+recyclerView = findViewById(R.id.recyclerView);
+recyclerView.setLayoutManager(new LinearLayoutManager(this));
+cartItemList = new ArrayList<>();
+// Initialize adapter with cartItemList (Changed to ShoppingAdapter)
+adapter = new ShoppingAdapter(cartItemList, this);
+recyclerView.setAdapter(adapter);
+// Get the product details from the intent if passed from ProductListActivity
+Bundle extras = getIntent().getExtras();
+if (extras != null && extras.containsKey("productName") && extras.containsKey("productPrice")) {
+String productName = extras.getString("productName");
+double productPrice = extras.getDouble("productPrice");
+// Add the product to the cart
+addToCart(productName, productPrice);
+}
 
         Button payNowButton = findViewById(R.id.checkoutBTN);
 
