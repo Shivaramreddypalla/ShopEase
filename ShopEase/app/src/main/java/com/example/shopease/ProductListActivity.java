@@ -1,5 +1,4 @@
 package com.example.shopease;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.widget.SearchView;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
@@ -67,35 +68,73 @@ public class ProductListActivity extends AppCompatActivity {
             Class<?> destinationActivity = activityMap.get(itemId); // Get the destination activity from the map
 
             if (destinationActivity != null) {
-                startActivity(new Intent(ProductListActivity.this, destinationActivity));
+                Intent intent = new Intent(ProductListActivity.this, destinationActivity);
+                if (destinationActivity.equals(ShoppingCartActivity.class)) {
+                    intent.putParcelableArrayListExtra("cartItems", new ArrayList<>(cartItemList));
+                }
+                startActivity(intent);
                 return true;
             }
 
             return false;
         });
 
+
+
+        SearchView searchView = findViewById(R.id.searchViewProducts);
+        searchView.setQueryHint("Search for products");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterProducts(newText);
+                return true;
+            }
+        });
+
+
+
     }
+    private void filterProducts(String searchText) {
+        if (searchText.isEmpty()) {
+            adapter.setProducts(productList);
+        } else {
+            List<Product> filteredList = new ArrayList<>();
+            for (Product product : productList) {
+                if (product.getName().toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredList.add(product);
+                }
+            }
+            adapter.setProducts(filteredList);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
     private void initializeActivityMap() {
         activityMap = new HashMap<>();
         activityMap.put(R.id.navigation_home, ProductListActivity.class);
         activityMap.put(R.id.navigation_cart, ShoppingCartActivity.class);
         activityMap.put(R.id.navigation_profile, UserProfileActivity.class); // Profile activity
     }
-private void retrieveProducts() {
-    productsRef.get().addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-            productList.clear(); // Clear the existing product list
-            for (QueryDocumentSnapshot document : task.getResult()) {
-                // Convert each document into a Product object
-                Product product = document.toObject(Product.class);
-                productList.add(product); // Add the product to the list
+    private void retrieveProducts() {
+        productsRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                productList.clear(); // Clear the existing product list
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    // Convert each document into a Product object
+                    Product product = document.toObject(Product.class);
+                    productList.add(product); // Add the product to the list
+                }
+                adapter.notifyDataSetChanged(); // Notify the adapter about data change
+            } else {
+                Log.e("ProductListActivity", "Error getting products", task.getException());
             }
-            adapter.notifyDataSetChanged(); // Notify the adapter about data change
-        } else {
-            Log.e("ProductListActivity", "Error getting products", task.getException());
-        }
-    });
-}
+        });
+    }
 
 
 
@@ -109,3 +148,4 @@ private void retrieveProducts() {
         Log.d("ProductListActivity", "Cart items after adding: " + cartItemList.toString());
     }
 }
+

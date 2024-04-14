@@ -1,5 +1,4 @@
 package com.example.shopease;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public interface OnAddItemClickListener {
         void onAddItemClick(int position);
+    }
+    public void setProducts(List<Product> products) {
+        this.productList = products;
     }
 
     // Constructor
