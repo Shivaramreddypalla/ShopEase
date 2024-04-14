@@ -1,104 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/activity_checkout.xml -->
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- Checkout Title -->
     <TextView
         android:id="@+id/textViewCheckout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Checkout"
-        android:textSize="48sp"
+        android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.398"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"/>
 
+    <!-- Order Summary -->
     <TextView
         android:id="@+id/textViewOrderSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Summary"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCheckout"
-        app:layout_constraintVertical_bias="0.038" />
+        android:textStyle="bold"
+        android:layout_below="@id/textViewCheckout"
+        android:layout_marginTop="24dp"/>
 
-    <TextView
-        android:id="@+id/textViewOrderTotalCost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Order Total Cost: $100.00"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewOrderSummary"
-        app:layout_constraintVertical_bias="0.065" />
+    <!-- Order Items List (You can use RecyclerView to display order items) -->
+    <!-- activity_checkout.xml -->
 
-    <TextView
-        android:id="@+id/textViewDeliveryCost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Delivery Cost: $10.00"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewOrderTotalCost"
-        app:layout_constraintVertical_bias="0.062" />
+    <!-- Divider -->
 
-    <TextView
-        android:id="@+id/textViewTotalCost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Total Cost: $110.00"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewDeliveryCost"
-        app:layout_constraintVertical_bias="0.063" />
 
-    <TextView
-        android:id="@+id/textViewAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Delivery Address: 123 Main St, City, Country"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTotalCost"
-        app:layout_constraintVertical_bias="0.065" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/textViewOrderSummary"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Total Cost -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCartItems"
+        android:layout_width="378dp"
+        android:layout_height="371dp"
+        android:layout_below="@id/divider"
+        android:layout_marginTop="17dp" />
+    <!-- Delivery Address -->
+
+    <!-- Pay Now Button -->
+
 
     <Button
         android:id="@+id/buttonPay"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAddress"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text="Pay Now"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddress"
-        app:layout_constraintVertical_bias="0.421" />
+        android:textSize="20sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deliveryValue"
+        android:layout_marginStart="1dp"
+
+        android:layout_marginTop="11dp"
+
+        android:layout_marginEnd="16dp"
+        android:text="Delivery Address: 123 Main St, City, Country"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/deliveryValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recyclerViewCartItems"
+        android:layout_marginTop="7dp"
+        android:text="Delivery Value: $110.00"
+        android:textSize="18sp" />
+
+
+</RelativeLayout>

@@ -48,5 +48,3 @@ Picasso.get().load(orderItem.getImageUrl()).into(productImageView);
 }
 }
 }
-
-has context menu

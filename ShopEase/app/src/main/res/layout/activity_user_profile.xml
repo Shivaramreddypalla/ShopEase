@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/editBTN"
-        android:src="@mipmap/user_image_placeholder_round"/>
+        android:src="@drawable/user_image_placeholder"/>
 
     <!-- Edit Button -->
     <Button
